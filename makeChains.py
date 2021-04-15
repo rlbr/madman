@@ -5,7 +5,9 @@ of generating new chains every time we want to make poetry.
 """
 from __future__ import print_function
 
-import sys, Markov, os
+from argparse import ArgumentParser
+import Markov
+import os
 
 
 def makeChain(name, sourceDir, cacheDir):
@@ -36,18 +38,15 @@ def deleteChainCache(name, cacheDir):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print(
-            """Usage:
-    makeChains.py chainName
-where chainName is a specific source text to parse and cache."""
-        )
-        sys.exit(1)
-
+    parser = ArgumentParser()
+    parser.add_argument(
+        "chainName", help="chainName is a specific source text to parse and cache"
+    )
+    args = parser.parse_args()
     print("Deleting old cache files")
-    deleteChainCache(sys.argv[1], "cache/")
+    deleteChainCache(args.chainName, "cache/")
 
     print("Creating new cache files")
-    makeChain(sys.argv[1], "sources/", "cache/")
+    makeChain(args.chainName, "sources/", "cache/")
 
     print("Chain(s) created successfully.")

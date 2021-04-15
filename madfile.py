@@ -1,9 +1,9 @@
+# /usr/bin/env python
 from __future__ import print_function
-#/usr/bin/env python
 
-import sys, fileinput
+
+import fileinput
 import nltk.data
-import nltk.tokenize.punkt as punkt
 import madman
 
 brain = "twain"
@@ -14,7 +14,7 @@ text = ""
 for line in fileinput.input():
     text += line
 
-sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
+sent_detector = nltk.data.load("tokenizers/punkt/english.pickle")
 
 sentences = sent_detector.tokenize(text)
 
