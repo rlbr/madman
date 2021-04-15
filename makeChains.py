@@ -13,7 +13,7 @@ import os
 def makeChain(name, sourceDir, cacheDir):
     """Parse the source text to generate new Markov chains."""
     sourceFile = sourceDir + name + ".txt"
-
+    os.makedirs(cacheDir, exist_ok=True)
     fwd = Markov.MarkovChain(cacheDir + name + "-fwd", 1, True)
 
     try:
